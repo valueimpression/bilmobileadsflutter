@@ -13,14 +13,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+	static final String _bannerID = "1001";
+	static final String _interstitialID = "1002";
+	static final String _rewardedID = "1003";
+
   AdInterstitial adInterstitial;
   AdRewarded adRewarded;
 
-  AdBanner _smartbanner;
-  AdBanner _banner320x50;
-
-  BannerController _smartbannerController;
-  BannerController _banner320x50Controller;
+  AdBanner _banner;
+  BannerController _bannerController;
 
   @override
   void initState() {
@@ -28,22 +30,13 @@ class _MyAppState extends State<MyApp> {
 
     PBMobileAds.initialize(testMode: false);
 
-    _smartbanner = AdBanner(
-      adUnitId: "13b7495e-1e87-414a-afcd-ef8a9034bd22",
+    _banner = AdBanner(
+      adUnitId: _bannerID,
       listener: (BilAdEvents event, Map<String, dynamic> args) {
-        handleEvents(event, args, 'SmartBanner');
+        handleEvents(event, args, 'Banner');
       },
       onBannerCreated: (BannerController controller) {
-        _smartbannerController = controller;
-      },
-    );
-    _banner320x50 = AdBanner(
-      adUnitId: "2d0c7a48-792e-4e77-adef-c5220d947432",
-      listener: (BilAdEvents event, Map<String, dynamic> args) {
-        handleEvents(event, args, 'Banner320x50');
-      },
-      onBannerCreated: (BannerController controller) {
-        _banner320x50Controller = controller;
+        _bannerController = controller;
       },
     );
   }
@@ -120,21 +113,7 @@ class _MyAppState extends State<MyApp> {
                   width: size.width,
                   height: height,
                   color: Colors.amber,
-                  child: _smartbanner,
-                );
-              },
-            ),
-            SizedBox(height: 10),
-            Divider(color: Colors.black),
-            SizedBox(height: 10),
-            Builder(
-              builder: (BuildContext context) {
-                final size = MediaQuery.of(context).size;
-                return Container(
-                  width: size.width,
-                  height: 250,
-                  color: Colors.amber,
-                  child: _banner320x50,
+                  child: _banner,
                 );
               },
             ),
@@ -142,29 +121,24 @@ class _MyAppState extends State<MyApp> {
             Divider(color: Colors.black),
             SizedBox(height: 10),
             createBTN("Banner - Show", () {
-              _smartbannerController.show();
-              _banner320x50Controller.show();
+              _bannerController.show();
             }),
             createBTN("Banner - Hide", () {
-              _smartbannerController.hide();
-              _banner320x50Controller.hide();
+              _bannerController.hide();
             }),
             createBTN("Banner - GetSize", () async {
-              double w = await _smartbannerController.widthInPixels;
-              double h = await _smartbannerController.heightInPixels;
-
-              double w2 = await _banner320x50Controller.widthInPixels;
-              double h2 = await _banner320x50Controller.heightInPixels;
+              double w = await _bannerController.widthInPixels;
+              double h = await _bannerController.heightInPixels;
 
               print(
-                  "BannerSize: smart: w-$w | h-$h && banner: w2-$w2 | h2-$h2");
+                  "BannerSize: banner: w-$w | h-$h");
             }),
             SizedBox(height: 10),
             Divider(color: Colors.black),
             SizedBox(height: 10),
             createBTN("Intersititial - Create", () {
               adInterstitial = new AdInterstitial(
-                adUnitId: "3bad632c-26f8-4137-ae27-05325ee1b30c",
+                adUnitId: _interstitialID,
                 listener: (BilAdEvents event, Map<String, dynamic> args) {
                   handleEvents(event, args, 'Interstitial');
                 },
@@ -184,7 +158,7 @@ class _MyAppState extends State<MyApp> {
             SizedBox(height: 10),
             createBTN("Rewarded - Create", () {
               adRewarded = new AdRewarded(
-                adUnitId: "d4aa579a-1655-452b-9502-b16ed31d2a99",
+                adUnitId: _rewardedID,
                 listener: (BilAdEvents event, Map<String, dynamic> args) {
                   handleEvents(event, args, 'Rewarded');
                 },
