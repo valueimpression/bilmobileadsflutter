@@ -1,14 +1,6 @@
-
-import 'dart:async';
-
-import 'package:flutter/services.dart';
-
-class Bilmobileadsflutter {
-  static const MethodChannel _channel =
-      const MethodChannel('bilmobileadsflutter');
-
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
-}
+export 'Ultil.dart';
+export 'PBMobileAds.dart';
+export 'AdBanner.dart';
+export 'AdInterstitial.dart';
+export 'AdRewarded.dart';
+export 'AdEventsHandler.dart';

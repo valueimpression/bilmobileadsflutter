@@ -1,12 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
-import 'package:bilmobileadsflutter/Ultil.dart';
-import 'package:bilmobileadsflutter/PBMobileAds.dart';
-import 'package:bilmobileadsflutter/AdBanner.dart';
-import 'package:bilmobileadsflutter/AdInterstitial.dart';
-import 'package:bilmobileadsflutter/AdRewarded.dart';
+import 'package:bilmobileadsflutter/bilmobileadsflutter.dart';
 
 void main() {
   runApp(MyApp());
