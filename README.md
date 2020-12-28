@@ -4,7 +4,7 @@ A flutter plugin for integrate ValueImpressionSDK.
 
 ## Getting Started
 # BilMobileAdsFlutter
-[[pub.dev-v1.0.0]](https://pub.dartlang.org/packages/bilmobileadsflutter)
+[[pub.dev]](https://pub.dartlang.org/packages/bilmobileadsflutter)
 
 A Flutter plugin that uses native platform views to show Banner ads!. This plugin also has support for Interstitial and Reward ads.
 
