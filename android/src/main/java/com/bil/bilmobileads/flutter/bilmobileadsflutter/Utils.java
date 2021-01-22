@@ -79,8 +79,8 @@ public class Utils {
             @Override
             public void onUserEarnedReward(ADRewardItem var1) {
                 Map<String, Object> args = new HashMap<>();
-                args.put("type", "HNL");
-                args.put("coin", 20);
+                args.put("type", var1.getType());
+                args.put("amount", var1.getAmount());
                 adChannel.invokeMethod("rewarded", args);
             }
 

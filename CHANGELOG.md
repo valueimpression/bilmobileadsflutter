@@ -9,3 +9,7 @@
 ## 1.1.1
 
 * Fix a few bug display banner
+
+## 1.1.2
+
+* Fix a few bug

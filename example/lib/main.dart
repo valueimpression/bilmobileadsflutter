@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
 
     PBMobileAds.initialize(testMode: false);
 
-    _banner = AdBanner(
+    _banner = new AdBanner(
       adUnitId: _bannerID,
       listener: (BilAdEvents event, Map<String, dynamic> args) {
         handleEvents(event, args, 'Banner');
