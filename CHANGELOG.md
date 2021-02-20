@@ -17,3 +17,7 @@
 ## 1.1.3
 
 * Fix import spelling ADEventsHandler.dart to AdEventsHandler.dart
+
+## 1.1.4
+
+* Fix bug
