@@ -5,7 +5,7 @@ class PBMobileAds {
   static const MethodChannel _channel =
       MethodChannel('bilmobileads/PBMobileAds');
 
-  PBMobileAds.initialize({bool testMode}) {
+  PBMobileAds.initialize({bool testMode = false}) {
     _channel.invokeMethod('initialize', testMode);
   }
 

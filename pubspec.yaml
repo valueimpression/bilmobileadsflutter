@@ -1,10 +1,10 @@
 name: bilmobileadsflutter
 description: A flutter plugin for integrate ValueImpressionSDK.
-version: 1.2.0
+version: 1.2.1
 homepage: https://github.com/valueimpression/bilmobileadsflutter
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.12.0 <4.0.0"
   flutter: ">=1.12.0"
 
 dependencies:

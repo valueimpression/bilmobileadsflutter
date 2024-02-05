@@ -11,10 +11,10 @@ class AdBanner extends StatefulWidget {
   final void Function(BannerController) onBannerCreated;
 
   AdBanner({
-    Key key,
-    this.adUnitId,
-    this.listener,
-    this.onBannerCreated,
+    Key? key,
+    required this.adUnitId,
+    required this.listener,
+    required this.onBannerCreated,
   }) : super(key: key);
 
   @override
@@ -25,7 +25,7 @@ class _AdBannerState extends State<AdBanner> {
   static const String PREFIX = 'bilmobileads/AdBanner';
 
   final UniqueKey _uniKey = UniqueKey();
-  BannerController _controller;
+  late BannerController _controller;
 
   @override
   void initState() {
@@ -71,9 +71,7 @@ class _AdBannerState extends State<AdBanner> {
   void _onPlatformViewCreated(int id) {
     _controller = BannerController(id, PREFIX, widget.listener);
 
-    if (widget.onBannerCreated != null) {
-      widget.onBannerCreated(_controller);
-    }
+    widget.onBannerCreated(_controller);
   }
 
   Map<String, dynamic> get _bannerParams =>
@@ -87,15 +85,13 @@ class BannerController extends AdEventsHandler {
       Function(BilAdEvents, Map<String, dynamic>) listener)
       : _channel = MethodChannel(prefix + '_$id'),
         super(listener) {
-    if (listener != null) {
-      _channel.invokeMethod('setListener');
-      _channel.setMethodCallHandler(handleEvent);
-    }
+    _channel.invokeMethod('setListener');
+    _channel.setMethodCallHandler(handleEvent);
   }
 
   void show() {
-		_channel.invokeMethod('show');
-	}
+    _channel.invokeMethod('show');
+  }
 
   void hide() {
     _channel.invokeMethod('hide');

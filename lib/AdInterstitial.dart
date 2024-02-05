@@ -1,7 +1,5 @@
 import 'package:bilmobileadsflutter/AdEventsHandler.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'Ultil.dart';
 
@@ -10,17 +8,17 @@ class AdInterstitial extends AdEventsHandler {
 
   static const MethodChannel _channel = MethodChannel(PREFIX);
 
-  int id;
+  late int id;
   final String adUnitId;
-  MethodChannel _listenerChannel;
+  late MethodChannel _listenerChannel;
   final void Function(BilAdEvents, Map<String, dynamic>) listener;
 
   /// Create an Interstitial.
   ///
   /// A valid [adUnitId] is required.
   AdInterstitial({
-    @required this.adUnitId,
-    this.listener,
+    required this.adUnitId,
+    required this.listener,
   }) : super(listener) {
     id = hashCode;
 
@@ -30,12 +28,10 @@ class AdInterstitial extends AdEventsHandler {
   void create() async {
     await _channel.invokeMethod('create', _channelID..['adUnitId'] = adUnitId);
 
-    if (listener != null) {
-      await _channel.invokeMethod('setListener', _channelID);
+    await _channel.invokeMethod('setListener', _channelID);
 
-      _listenerChannel = MethodChannel(PREFIX + '_$id');
-      _listenerChannel.setMethodCallHandler(handleEvent);
-    }
+    _listenerChannel = MethodChannel(PREFIX + '_$id');
+    _listenerChannel.setMethodCallHandler(handleEvent);
   }
 
   void preLoad() async {

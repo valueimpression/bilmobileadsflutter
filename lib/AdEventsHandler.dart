@@ -9,36 +9,33 @@ abstract class AdEventsHandler {
       : _listener = listener;
 
   Future<dynamic> handleEvent(MethodCall call) async {
+    Map<String, dynamic> data = Map<String, dynamic>.from(call.arguments);
     switch (call.method) {
       case 'loaded':
-        _listener(BilAdEvents.loaded, null);
+        _listener(BilAdEvents.loaded, data);
         break;
       case 'opened':
-        _listener(BilAdEvents.opened, null);
+        _listener(BilAdEvents.opened, data);
         break;
       case 'closed':
-        _listener(BilAdEvents.closed, null);
+        _listener(BilAdEvents.closed, data);
         break;
       case 'clicked':
-        _listener(BilAdEvents.clicked, null);
+        _listener(BilAdEvents.clicked, data);
         break;
       case 'leftApplication':
-        _listener(BilAdEvents.leftApplication, null);
+        _listener(BilAdEvents.leftApplication, data);
         break;
       case 'rewarded':
-        _listener(
-            BilAdEvents.rewarded, Map<String, dynamic>.from(call.arguments));
+        _listener(BilAdEvents.rewarded, data);
         break;
       case 'failedToLoad':
-        _listener(BilAdEvents.failedToLoad,
-            Map<String, dynamic>.from(call.arguments));
+        _listener(BilAdEvents.failedToLoad, data);
         break;
       case 'failedToShow':
-        _listener(BilAdEvents.failedToShow,
-            Map<String, dynamic>.from(call.arguments));
+        _listener(BilAdEvents.failedToShow, data);
         break;
     }
-
     return null;
   }
 }

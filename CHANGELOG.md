@@ -25,3 +25,7 @@
 ## 1.2.0
 
 * Update libs
+
+## 1.2.1
+
+* Update libs
