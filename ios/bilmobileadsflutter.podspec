@@ -15,12 +15,12 @@ Pod::Spec.new do |s|
   s.source_files     = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
 
-  s.platform         = :ios, '9.0'
+  s.platform         = :ios, '11.0'
   s.swift_version    = '5.0'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '11.0'
   s.static_framework = true
 
   s.dependency 'Flutter'
-  s.dependency "BilMobileAds", '1.2.1'
+  s.dependency "BilMobileAds", '2.2.2'
 end

@@ -21,3 +21,7 @@
 ## 1.1.4
 
 * Fix bug
+
+## 1.2.0
+
+* Update libs

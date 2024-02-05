@@ -34,6 +34,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.gms:play-services-ads:18.2.0'
-    implementation 'com.github.valueimpression:BilMobileAdsAndroid:1.4.2'
+    implementation 'com.google.android.gms:play-services-ads:22.2.0'
+    implementation 'com.github.valueimpression:BilMobileAdsAndroid:2.2.3'
 }
