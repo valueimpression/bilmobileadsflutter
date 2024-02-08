@@ -50,10 +50,11 @@ void initState() {
 ```
 
 ### Supported Platforms
-- iOS: >= `9.0`
+- iOS: >= `11.0`
 - Android >= `19`
 
 ### Supported Ads for ValueImpressionSDK
 - Banner Ads
 - Interstitial Ads
 - Reward Ads
+`

@@ -13,16 +13,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  static const String _bannerID = "ff76160c-5978-4171-b7a7-5cadf8fc9712";
+  static const String _interstitialID = "cd228c7d-a17e-4546-bc3c-f3c4971d416e";
+  static const String _rewardedID = "3590bf71-0ec3-4f49-b4ae-0720e359d4a3";
 
-	static final String _bannerID = "1001";
-	static final String _interstitialID = "1002";
-	static final String _rewardedID = "1003";
+  late AdInterstitial adInterstitial;
+  late AdRewarded adRewarded;
 
-  AdInterstitial adInterstitial;
-  AdRewarded adRewarded;
-
-  AdBanner _banner;
-  BannerController _bannerController;
+  late AdBanner _banner;
+  late BannerController _bannerController;
 
   @override
   void initState() {
@@ -30,7 +29,7 @@ class _MyAppState extends State<MyApp> {
 
     PBMobileAds.initialize(testMode: false);
 
-    _banner = new AdBanner(
+    _banner = AdBanner(
       adUnitId: _bannerID,
       listener: (BilAdEvents event, Map<String, dynamic> args) {
         handleEvents(event, args, 'Banner');
@@ -81,30 +80,40 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        key: _scaffoldKey,
+        // key: _scaffoldKey,
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
         body: ListView(
           children: <Widget>[
-            createBTN("PBMobileAds - Init", () {
-              PBMobileAds.initialize(testMode: false);
-            }),
-            createBTN("PBMobileAds - enableCOPPA", () {
-              PBMobileAds.enableCOPPA();
-            }),
-            createBTN("PBMobileAds - disableCOPPA", () {
-              PBMobileAds.disableCOPPA();
-            }),
-            createBTN("PBMobileAds - setYearOfBirth", () {
-              PBMobileAds.setYearOfBirth(1991);
-            }),
-            createBTN("PBMobileAds - setGender", () {
-              PBMobileAds.setGender(BilGender.Male);
-            }),
-            SizedBox(height: 10),
-            Divider(color: Colors.black),
-            SizedBox(height: 10),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  PBMobileAds.initialize(testMode: false);
+                },
+                child: const Text("PBMobileAds - Init"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  PBMobileAds.enableCOPPA();
+                },
+                child: const Text("PBMobileAds - enableCOPPA"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  PBMobileAds.disableCOPPA();
+                },
+                child: const Text("PBMobileAds - disableCOPPA"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  PBMobileAds.setYearOfBirth(1991);
+                },
+                child: const Text("PBMobileAds - setYearOfBirth"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  PBMobileAds.setGender(BilGender.Male);
+                },
+                child: const Text("PBMobileAds - setGender"))),
+            const SizedBox(height: 10),
+            const Divider(color: Colors.black),
+            const SizedBox(height: 10),
             Builder(
               builder: (BuildContext context) {
                 final size = MediaQuery.of(context).size;
@@ -117,103 +126,134 @@ class _MyAppState extends State<MyApp> {
                 );
               },
             ),
-            SizedBox(height: 10),
-            Divider(color: Colors.black),
-            SizedBox(height: 10),
-            createBTN("Banner - Show", () {
-              _bannerController.show();
-            }),
-            createBTN("Banner - Hide", () {
-              _bannerController.hide();
-            }),
-            createBTN("Banner - GetSize", () async {
-              double w = await _bannerController.widthInPixels;
-              double h = await _bannerController.heightInPixels;
+            const SizedBox(height: 10),
+            const Divider(color: Colors.black),
+            const SizedBox(height: 10),
 
-              print(
-                  "BannerSize: banner: w-$w | h-$h");
-            }),
-            SizedBox(height: 10),
-            Divider(color: Colors.black),
-            SizedBox(height: 10),
-            createBTN("Intersititial - Create", () {
-              adInterstitial = new AdInterstitial(
-                adUnitId: _interstitialID,
-                listener: (BilAdEvents event, Map<String, dynamic> args) {
-                  handleEvents(event, args, 'Interstitial');
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  _bannerController.show();
                 },
-              );
-            }),
-            createBTN("Intersititial - Preload", () {
-              adInterstitial.preLoad();
-            }),
-            createBTN("Intersititial - Show", () {
-              adInterstitial.show();
-            }),
-            createBTN("Intersititial - Destroy", () {
-              adInterstitial.destroy();
-            }),
-            SizedBox(height: 10),
-            Divider(color: Colors.black),
-            SizedBox(height: 10),
-            createBTN("Rewarded - Create", () {
-              adRewarded = new AdRewarded(
-                adUnitId: _rewardedID,
-                listener: (BilAdEvents event, Map<String, dynamic> args) {
-                  handleEvents(event, args, 'Rewarded');
+                child: const Text("Banner - Show"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  _bannerController.hide();
                 },
-              );
-            }),
-            createBTN("Rewarded - Preload", () {
-              adRewarded.preLoad();
-            }),
-            createBTN("Rewarded - Show", () {
-              adRewarded.show();
-            }),
-            createBTN("Rewarded - Destroy", () {
-              adRewarded.destroy();
-            }),
-            SizedBox(height: 10),
-            Divider(color: Colors.black),
-            SizedBox(height: 10),
+                child: const Text("Banner - Hide"))),
+            createBTN(ElevatedButton(
+                onPressed: () async {
+                  double w = await _bannerController.widthInPixels;
+                  double h = await _bannerController.heightInPixels;
+
+                  print("BannerSize: banner: w-$w | h-$h");
+                },
+                child: const Text("Banner - GetSize"))),
+
+            const SizedBox(height: 10),
+            const Divider(color: Colors.black),
+            const SizedBox(height: 10),
+
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  adInterstitial = AdInterstitial(
+                    adUnitId: _interstitialID,
+                    listener: (BilAdEvents event, Map<String, dynamic> args) {
+                      handleEvents(event, args, 'Interstitial');
+                    },
+                  );
+                },
+                child: const Text("Intersititial - Create"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  adInterstitial.preLoad();
+                },
+                child: const Text("Interstitial - Preload"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  adInterstitial.show();
+                },
+                child: const Text("Interstitial - Show"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  adInterstitial.destroy();
+                },
+                child: const Text("Interstitial - Destroy"))),
+
+            const SizedBox(height: 10),
+            const Divider(color: Colors.black),
+            const SizedBox(height: 10),
+
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  adRewarded = AdRewarded(
+                    adUnitId: _rewardedID,
+                    listener: (BilAdEvents event, Map<String, dynamic> args) {
+                      handleEvents(event, args, 'Rewarded');
+                    },
+                  );
+                },
+                child: const Text("Rewarded - Create"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  adRewarded.preLoad();
+                },
+                child: const Text("Rewarded - Preload"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  adRewarded.show();
+                },
+                child: const Text("Rewarded - Show"))),
+            createBTN(ElevatedButton(
+                onPressed: () {
+                  adRewarded.destroy();
+                },
+                child: const Text("Rewarded - Destroy"))),
+
+            const SizedBox(height: 10),
+            const Divider(color: Colors.black),
+            const SizedBox(height: 10),
           ],
         ),
       ),
     );
   }
 
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  // GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   showAlert(String alert) {
     final snackBar = SnackBar(
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
       content: Text(alert),
       action: SnackBarAction(
-        label: 'Đóng',
+        label: 'Close',
         onPressed: () {
           // Some code to undo the change.
         },
       ),
     );
-    _scaffoldKey.currentState.hideCurrentSnackBar();
-    _scaffoldKey.currentState.showSnackBar(snackBar);
+    // _scaffoldKey.currentState!.hidhideCurrentSnackBar();
+    // _scaffoldKey.currentState!.showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  Widget createBTN(String txtBTN, Function _onPress) {
+  Widget createBTN(Widget widget) {
+    // Function onPress
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 5.0,
       ),
       width: double.infinity,
-      child: RaisedButton(
-        onPressed: _onPress,
-        elevation: 5.0,
-        color: Colors.white,
-        padding: EdgeInsets.all(15.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        child: Text(txtBTN),
-      ),
+      child: widget,
+      // child: RaisedButton(
+      //   onPressed: _onPress,
+      //   elevation: 5.0,
+      //   color: Colors.white,
+      //   padding: EdgeInsets.all(15.0),
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.circular(30.0),
+      //   ),
+      //   child: Text(txtBTN),
+      // ),
     );
   }
 }

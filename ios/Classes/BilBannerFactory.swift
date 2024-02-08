@@ -4,6 +4,7 @@
 //
 //  Created by HNL_MAC on 12/28/20.
 //
+import Flutter
 
 class BilBannerFactory : NSObject, FlutterPlatformViewFactory {
     let messeneger: FlutterBinaryMessenger

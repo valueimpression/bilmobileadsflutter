@@ -1,3 +1,12 @@
+
+// import 'bilmobileadsflutter_platform_interface.dart';
+
+// class Bilmobileadsflutter {
+//   Future<String?> getPlatformVersion() {
+//     return BilmobileadsflutterPlatform.instance.getPlatformVersion();
+//   }
+// }
+
 export 'Ultil.dart';
 export 'PBMobileAds.dart';
 export 'AdBanner.dart';

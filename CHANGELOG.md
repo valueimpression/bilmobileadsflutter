@@ -29,3 +29,7 @@
 ## 1.2.1
 
 * Update libs
+
+## 1.5.0
+
+* Update libs in sdk

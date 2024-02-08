@@ -11,6 +11,7 @@ import com.bil.bilmobileads.ADBanner;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
+
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -47,7 +48,7 @@ public class FADBanner implements PlatformView, MethodChannel.MethodCallHandler 
 
         HashMap<String, Object> args = (HashMap<String, Object>) argsObj;
         String adUnitId = (String) args.get("adUnitId");
-        banner = new ADBanner(this.adPlaceholder, adUnitId);
+        banner = new ADBanner(FPBMobileAds.instance.getFlutterActivity(), this.adPlaceholder, adUnitId);
         this.isHidden = false;
     }
 
@@ -69,9 +70,7 @@ public class FADBanner implements PlatformView, MethodChannel.MethodCallHandler 
         Log.d(Utils.LOGTAG, "Call - Func: " + call.method + (call.arguments != null ? " | args: " + call.arguments : ""));
         switch (call.method) {
             case "setListener":
-                if (banner.adDelegate != null) return;
                 banner.setListener(Utils.createAdListener(channel));
-
                 result.success(null);
                 break;
             case "show":

@@ -65,8 +65,6 @@ public class FADRewarded implements MethodChannel.MethodCallHandler {
             case "setListener":
                 if (rewarded == null) result.error(null, null, null);
 
-                if (rewarded.adDelegate != null) return;
-
                 MethodChannel adChannel = new MethodChannel(binding.getBinaryMessenger(), Utils.REWARDED + "_" + id);
                 allAdsDelegate.put(id, adChannel);
                 rewarded.setListener(Utils.createAdRewardedListener(adChannel));

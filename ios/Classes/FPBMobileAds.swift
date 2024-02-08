@@ -66,16 +66,16 @@ public class FPBMobileAds: NSObject, FlutterPlugin {
             let gender = call.arguments as! Int
             switch (gender) {
             case 0: // Unknown
-                PBMobileAds.shared.setGender(gender: Gender.unknown)
+                PBMobileAds.shared.setGender(gender: .unknown)
                 break
             case 1: // Male
-                PBMobileAds.shared.setGender(gender: Gender.male)
+                PBMobileAds.shared.setGender(gender: .male)
                 break
             case 2: // Female
-                PBMobileAds.shared.setGender(gender: Gender.female)
+                PBMobileAds.shared.setGender(gender: .female)
                 break
             default:
-                PBMobileAds.shared.setGender(gender: Gender.unknown)
+                PBMobileAds.shared.setGender(gender: .unknown)
             }
             break
         default:

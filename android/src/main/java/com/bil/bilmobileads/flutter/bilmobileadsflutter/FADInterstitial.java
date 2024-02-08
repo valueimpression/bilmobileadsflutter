@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -65,8 +66,6 @@ public class FADInterstitial implements MethodChannel.MethodCallHandler {
             case "setListener":
                 if (interstitial == null) result.error(null, null, null);
 
-                if (interstitial.adDelegate != null) return;
-
                 MethodChannel adChannel = new MethodChannel(binding.getBinaryMessenger(), Utils.INTERSTITIAL + "_" + id);
                 allAdsDelegate.put(id, adChannel);
                 interstitial.setListener(Utils.createAdListener(adChannel));
@@ -76,7 +75,7 @@ public class FADInterstitial implements MethodChannel.MethodCallHandler {
             case "create":
                 if (interstitial == null) {
                     String adUnitId = (String) call.argument("adUnitId");
-                    ADInterstitial adinterstitial = new ADInterstitial(adUnitId);
+                    ADInterstitial adinterstitial = new ADInterstitial(FPBMobileAds.instance.getFlutterActivity(), adUnitId);
                     allAds.put(id, adinterstitial);
                 }
 

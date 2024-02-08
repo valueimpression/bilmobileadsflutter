@@ -54,7 +54,7 @@ public class FPBMobileAds implements MethodCallHandler {
                 if (isPluginInit) return;
 
                 final boolean testMode = (boolean) call.arguments;
-                PBMobileAds.instance.initialize(flutterActivity, testMode);
+                PBMobileAds.getInstance().initialize(flutterActivity, testMode);
                 isPluginInit = true;
 
                 result.success(null);
@@ -75,7 +75,11 @@ public class FPBMobileAds implements MethodCallHandler {
                 if (!isPluginReady()) return;
 
                 int yob = (int) call.arguments;
-                PBMobileAds.getInstance().setYearOfBirth(yob);
+                try {
+                    PBMobileAds.getInstance().setYearOfBirth(yob);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 result.success(null);
                 break;
             case "setGender":

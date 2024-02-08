@@ -5,6 +5,7 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 
 import com.bil.bilmobileads.entity.ADRewardItem;
+import com.bil.bilmobileads.entity.AdData;
 import com.bil.bilmobileads.interfaces.AdDelegate;
 import com.bil.bilmobileads.interfaces.AdRewardedDelegate;
 
@@ -77,10 +78,18 @@ public class Utils {
             }
 
             @Override
-            public void onUserEarnedReward(ADRewardItem var1) {
+            public void onUserEarnedReward() {
+                super.onUserEarnedReward();
+                adChannel.invokeMethod("rewarded", null);
+            }
+
+            @Override
+            public void onRewardedAdPaidEvent(AdData adData) {
+                super.onRewardedAdPaidEvent(adData);
                 Map<String, Object> args = new HashMap<>();
-                args.put("type", var1.getType());
-                args.put("amount", var1.getAmount());
+                args.put("currencyCode", adData.getCurrencyCode());
+                args.put("microsValue", adData.getMicrosValue());
+                args.put("precision", adData.getPrecision());
                 adChannel.invokeMethod("rewarded", args);
             }
 
